@@ -32,18 +32,20 @@ def checkIfProcessRunning(processName):
             pass
     return False;
 
-os.startfile (r"C:\Users\PpekKOX\Desktop\ifritMango\FPS\fps32.lnk")
+#os.startfile (r"C:\Users\PpekKOX\Desktop\ifritMango\FPS\fps32.lnk")
+print('Aram-Bot Version: 4.0')
+print('Last date of Update: 07.04.2023')
 os.system("TASKKILL /F /IM RiotClientServices.exe")
 os.system("TASKKILL /F /IM explorer.exe")
 time.sleep(2)
 
+
+print('Proceeding to open LeagueClient...')
 subprocess.call(['C:\Riot Games\League of Legends\LeagueClient.exe'])
 time.sleep(2)
 Lclick(843,456)
 
-print('Aram-Bot Version: 3.6')
-print('Last date of Update: 10.01.2023')
-print('Proceeding to open LeagueClient...')
+
 
 time.sleep(20)
 lockfile = os.path.expanduser('~\\AppData\\Local\\Riot Games\\Riot Client\\Config\\lockfile')
