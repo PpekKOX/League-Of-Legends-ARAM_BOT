@@ -6,6 +6,8 @@ import win32api, win32con
 import random
 import psutil
 from multiprocessing.connection import wait
+import json
+import requests
 
 keyboard2 = Controller()
 
@@ -41,11 +43,11 @@ class gra():
     def minimap_movement():
         x = random.randint(1365,1545)
         y = random.randint(665,838)
-        pg.movETo(x,y,0.5)
+        pg.movETo(x,y,0.2)
         Rclick()
         sleep(0.1)
         Rclick()
-        sleep(0.4)
+        sleep(0.2)
 
     def open_shop():
         keyboard2.press('p')
@@ -71,22 +73,79 @@ class gra():
         Rclick(850,538)
         sleep(0.5)
 
+    def in_game_shop():
+        gra.open_shop()
+        sleep(1)
+        gra.buy_items()
+        gra.close_shop()
+
+    def middle_screen_click():
+        Rclick(960,540)
+        sleep(0.5)
+
+    def follow_ally_1():
+        keyboard2.press(Key.f2)
+        gra.middle_screen_click()
+        keyboard2.release(Key.f2)
+    
+    def follow_ally_2():
+        keyboard2.press(Key.f3)
+        gra.middle_screen_click()
+        keyboard2.release(Key.f3)
+
+    def follow_ally_3():
+        keyboard2.press(Key.f4)
+        gra.middle_screen_click()
+        keyboard2.release(Key.f4)
+    
+    def follow_ally_4():
+        keyboard2.press(Key.f5)
+        gra.middle_screen_click()
+        keyboard2.release(Key.f5)
+
+    def koniec():
+        Lclick(1447,547)
+        sleep(1)
+        Lclick(1268,540)
+        sleep(1)
+        Lclick(1118,543)
+        sleep(1)
+        Lclick(975,539)
+        sleep(1)
+        Lclick(739,545)
+        sleep(1)
+        Lclick(1433,499)
+        sleep(1)
+        Lclick(529,544)
+        sleep(1)
+        Lclick(602,545)
+        sleep(1)
+        Lclick(961,840)     #okay
+        sleep(1)
+        Lclick(961,840)                                     
+        sleep(1)
+        Lclick(961,840)     
+
+
+webhook_url = "https://discord.com/api/webhooks/1093984448153927731/Ju2WX0GlTBTKwphMdCqnHJNgkiKl6HEXW9ec0GYl1TBf_AIDLGi2tCVDfNLmbIDkbK5Y"
+message = "The account has finished playing."
+
+payload = {
+    "content": message
+}
+
+json_payload = json.dumps(payload)
+
+headers = {
+    "Content-Type": "application/json"
+}
+
 
 sleep(10)
 
 #Zamyka E-mail Pop-Up
 Lclick(1047,227)
 sleep(2)
-
-#Sprawdza czy konto ma 30 LvL
-while True:
-    if pg.locateOnScreen('30.png', confidence=0.92):
-        print('Account finished, waiting...')
-        while pg.locateOnScreen('30.png', confidence=0.92):
-            sleep(1)
-    else:
-        print('Account not finished yet')
-        break
 
 #Sprawdza Leaverbustera
 print('Checking Leaverbuster PoP-Up...')
@@ -101,6 +160,17 @@ while True:
         print('Leaverbuster PoP-Up closed')
         break
     else:
+        break
+
+#Sprawdza czy konto ma 30 LvL
+while True:
+    if pg.locateOnScreen('30.png', confidence=0.92):
+        response = requests.post(webhook_url, data=json_payload, headers=headers)
+        print("Webhook sent with status code:", response.status_code)
+        while pg.locateOnScreen('30.png', confidence=0.92):
+            sleep(1)
+    else:
+        print('Account not finished yet')
         break
 
 
@@ -177,4 +247,250 @@ while True:
         break
     else:
         sleep(0.2)
-        
+
+sleep(2)
+
+#Lockuje Camere
+while True:
+    if pg.locateOnScreen('camera.png', confidence=0.9):
+        keyboard2.press('y')                          
+        sleep(0.1)
+        keyboard2.release('y')
+        break
+    else:
+        sleep(0.2)
+
+sleep(3)
+
+#IN-GAME-PATTERNS
+
+while True:
+    if checkIfProcessRunning('legends'):
+        gra.follow_ally_1()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+        gra.follow_ally_2()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()        
+        gra.follow_ally_3()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+        gra.follow_ally_4()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+        pg.moveTo(enemy_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+        pg.moveTo(ally_minion, duration=0.5)
+        Rclick()
+        gra.minimap_movement()
+    else:
+        sleep(30)
+        Lclick()
+        gra.koniec()
+        print('Game 1 finished')
+        break
+
+
+#Sprawdza czy konto ma 30 LvL
+while True:
+    if pg.locateOnScreen('30.png', confidence=0.92):
+        response = requests.post(webhook_url, data=json_payload, headers=headers)
+        print("Webhook sent with status code:", response.status_code)
+        while pg.locateOnScreen('30.png', confidence=0.92):
+            sleep(1)
+    else:
+        print('Account not finished yet')
+        break
+
+
+for x in range(2, 302):
+    print('Game ' + str(x) + ' finished')
+    sleep(3)
+    Lclick(848,836)
+    sleep(3)
+    Lclick(848,836)    
+    sleep(1)
+    #Akceptuje Mecz
+    while True:
+        accept = pg.locateCenterOnScreen('accept.png')
+        if pg.locateOnScreen(accept):
+            print('Accepting Match!')
+            sleep(1)
+            pg.leftClick(accept)
+            break
+        else:
+            sleep(0.2)
+
+    #Champion Select
+
+    while True:
+        if checkIfProcessRunning('legends'):
+            break
+        else:
+            champselect_aram = pg.locateCenterOnScreen('champselect_aram.png')
+            #sprawdza czy jestes w champion seletcie
+            if pg.locateOnScreen(champselect_aram, confidence=0.8):         
+                sleep(0.5)
+            else:
+                sleep(3)
+                Lclick(848,836)
+                sleep(3)
+                Lclick(958,717)        
+
+    sleep(10)
+       
+    #In-Game
+
+    #Shop
+
+    while True:
+        if pg.locateOnScreen('in_game', confidence=0.9):
+            gra.open_shop()
+            sleep(3)
+            gra.buy_items()
+            sleep(3)
+            gra.close_shop()
+            break
+        else:
+            sleep(0.2)
+
+    sleep(2)
+
+    #Lockuje Camere
+    while True:
+        if pg.locateOnScreen('camera.png', confidence=0.9):
+            keyboard2.press('y')                          
+            sleep(0.1)
+            keyboard2.release('y')
+            break
+        else:
+            sleep(0.2)
+
+    sleep(3)
+
+    #IN-GAME-PATTERNS
+
+    while True:
+        if checkIfProcessRunning('legends'):
+            gra.follow_ally_1()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+            gra.follow_ally_2()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()        
+            gra.follow_ally_3()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+            gra.follow_ally_4()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
+            pg.moveTo(enemy_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
+            pg.moveTo(ally_minion, duration=0.5)
+            Rclick()
+            gra.minimap_movement()
+        else:
+            sleep(30)
+            gra.koniec()
+            break
+
+    sleep(1)
+
+    #Sprawdza czy konto ma 30 LvL
+    while True:
+        if pg.locateOnScreen('30.png', confidence=0.92):
+            response = requests.post(webhook_url, data=json_payload, headers=headers)
+            print("Webhook sent with status code:", response.status_code)
+            while pg.locateOnScreen('30.png', confidence=0.92):
+                sleep(1)
+        else:
+            print('Account not finished yet')
+            break
+
+    sleep(1)       
