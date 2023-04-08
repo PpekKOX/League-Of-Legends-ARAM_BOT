@@ -63,15 +63,15 @@ class gra():
         Rclick(581,542)
         sleep(0.1)
         Rclick(581,542)
-        sleep(0.5)
+        sleep(1)
         Rclick(716,540)
         sleep(0.1)
         Rclick(716,540)
-        sleep(0.5)
+        sleep(1)
         Rclick(850,538)
         sleep(0.1)
         Rclick(850,538)
-        sleep(0.5)
+        sleep(1)
 
     def in_game_shop():
         gra.open_shop()
@@ -87,21 +87,25 @@ class gra():
         keyboard2.press(Key.f2)
         gra.middle_screen_click()
         keyboard2.release(Key.f2)
+        sleep(0.2)
     
     def follow_ally_2():
         keyboard2.press(Key.f3)
         gra.middle_screen_click()
         keyboard2.release(Key.f3)
+        sleep(0.2)
 
     def follow_ally_3():
         keyboard2.press(Key.f4)
         gra.middle_screen_click()
         keyboard2.release(Key.f4)
+        sleep(0.2)
     
     def follow_ally_4():
         keyboard2.press(Key.f5)
         gra.middle_screen_click()
         keyboard2.release(Key.f5)
+        sleep(0.2)
 
     def koniec():
         Lclick(1447,547)
@@ -124,7 +128,12 @@ class gra():
         sleep(1)
         Lclick(961,840)                                     
         sleep(1)
-        Lclick(961,840)     
+        Lclick(961,840)
+
+    def auto_attack():
+        keyboard2.press('x')
+        sleep(0.1)
+        keyboard2.release('x')     
 
 
 webhook_url = "https://discord.com/api/webhooks/1093984448153927731/Ju2WX0GlTBTKwphMdCqnHJNgkiKl6HEXW9ec0GYl1TBf_AIDLGi2tCVDfNLmbIDkbK5Y"
@@ -148,19 +157,8 @@ Lclick(1047,227)
 sleep(2)
 
 #Sprawdza Leaverbustera
-print('Checking Leaverbuster PoP-Up...')
-while True:
-    if pg.locateOnScreen('leaver.png', confidence=0.7):
-        sleep(5)
-        Lclick(821,431)
-        sleep(5)
-        pg.typewrite("I Agree")
-        sleep(5)
-        Lclick(837,485)
-        print('Leaverbuster PoP-Up closed')
-        break
-    else:
-        break
+Lclick(837,485)
+
 
 #Sprawdza czy konto ma 30 LvL
 while True:
@@ -183,22 +181,22 @@ os.system("TASKKILL /F /IM RiotClientCrashHandler.exe")
 
 play = pg.locateCenterOnScreen('play.png', confidence=0.95)
 pg.leftClick(play)
-sleep(2)
+sleep(3)
 
 pg.leftClick(381,261)   #PvP
-sleep(2)
+sleep(3)
 
 aram_mode = pg.locateCenterOnScreen('aram_mode.png', confidence=0.95)
 pg.leftClick(aram_mode)
-sleep(2)
+sleep(3)
 
 confirm = pg.locateCenterOnScreen('confirm.png', confidence=0.95)
 pg.leftClick(confirm)
-sleep(2)
+sleep(3)
 
 find_match = pg.locateCenterOnScreen('find_match.png', confidence=0.95)
 pg.leftClick(find_match)
-sleep(2)
+sleep(3)
 
 
 #Akceptuje Mecz
@@ -238,21 +236,13 @@ sleep(10)
 #Shop
 
 while True:
-    if pg.locateOnScreen('in_game', confidence=0.9):
+    if pg.locateOnScreen('in_game.png', confidence=0.9):
         gra.open_shop()
         sleep(3)
         gra.buy_items()
         sleep(3)
         gra.close_shop()
-        break
-    else:
-        sleep(0.2)
-
-sleep(2)
-
-#Lockuje Camere
-while True:
-    if pg.locateOnScreen('camera.png', confidence=0.9):
+        sleep(3)
         keyboard2.press('y')                          
         sleep(0.1)
         keyboard2.release('y')
@@ -263,68 +253,23 @@ while True:
 sleep(3)
 
 #IN-GAME-PATTERNS
-
 while True:
     if checkIfProcessRunning('legends'):
         gra.follow_ally_1()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
+        gra.auto_attack()
         gra.minimap_movement()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
         gra.minimap_movement()
         gra.follow_ally_2()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
+        gra.auto_attack()
         gra.minimap_movement()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
         gra.minimap_movement()        
         gra.follow_ally_3()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
+        gra.auto_attack()
         gra.minimap_movement()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
         gra.minimap_movement()
         gra.follow_ally_4()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
-        enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-        pg.moveTo(enemy_minion, duration=0.5)
-        Rclick()
+        gra.auto_attack()
         gra.minimap_movement()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
-        ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-        pg.moveTo(ally_minion, duration=0.5)
-        Rclick()
         gra.minimap_movement()
     else:
         sleep(30)
@@ -416,64 +361,20 @@ for x in range(2, 302):
     while True:
         if checkIfProcessRunning('legends'):
             gra.follow_ally_1()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
+            gra.auto_attack()
             gra.minimap_movement()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
             gra.minimap_movement()
             gra.follow_ally_2()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
+            gra.auto_attack()
             gra.minimap_movement()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
             gra.minimap_movement()        
             gra.follow_ally_3()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
+            gra.auto_attack()
             gra.minimap_movement()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
             gra.minimap_movement()
             gra.follow_ally_4()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
-            enemy_minion = pg.locateCenterOnScreen('enemy_minion.png', confidence=0.95)
-            pg.moveTo(enemy_minion, duration=0.5)
-            Rclick()
+            gra.auto_attack()
             gra.minimap_movement()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
-            ally_minion = pg.locateCenterOnScreen('ally_minion.png', confidence=0.95)
-            pg.moveTo(ally_minion, duration=0.5)
-            Rclick()
             gra.minimap_movement()
         else:
             sleep(30)

@@ -57,9 +57,9 @@ res.status_code
 time.sleep(15)
 Lclick(267,839)
 
-time.sleep(120)
+time.sleep(20)
 time.sleep(1)
-subprocess.call([sys.executable, 'C:\\Users\\PpekKOX\\Desktop\\League-Of-Legends-ARAM_BOT\\Bot.py'])
+subprocess.call([sys.executable, 'C:\\Users\\PpekKOX.Laptop\\Desktop\\League-Of-Legends-ARAM_BOT\\Bot.py'])
 time.sleep(5)
 Lclick(280,843)
 time.sleep(1)
