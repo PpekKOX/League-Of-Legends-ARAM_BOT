@@ -12,3 +12,12 @@ Changelogs (06.04.2023)	-> ver 4.0
 - Changed the code entirely, making it 2x shorter / faster
 - Changed the way the Bot behaves (Moving towards own minions, attacking enemy minions, moving randomly through the map)
 - Moved from Virtual Machine to Normal Machine, with the resolution 1920x1080
+
+
+4.1
+
+Changelogs (08.04.2023) -> ver 4.1
+
+- Changed the way the Bot behaves (Removed moving towards own minions / attacking enemy minions)
+- Done some of the final tests on a machine, fixed most of the bugs
+- Bot still in Beta-Phase
