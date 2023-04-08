@@ -201,11 +201,10 @@ sleep(3)
 
 #Akceptuje Mecz
 while True:
-    accept = pg.locateCenterOnScreen('accept.png')
-    if pg.locateOnScreen(accept):
+    if pg.locateOnScreen('accept.png'):
         print('Accepting Match!')
         sleep(1)
-        pg.leftClick(accept)
+        Lclick(961,721)
         break
     else:
         sleep(0.2)
