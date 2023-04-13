@@ -43,7 +43,7 @@ class gra():
     def minimap_movement():
         x = random.randint(1365,1545)
         y = random.randint(665,838)
-        pg.movETo(x,y,0.2)
+        pg.moveTo(x,y,0.2)
         Rclick()
         sleep(0.1)
         Rclick()
@@ -215,9 +215,8 @@ while True:
     if checkIfProcessRunning('legends'):
         break
     else:
-        champselect_aram = pg.locateCenterOnScreen('champselect_aram.png')
         #sprawdza czy jestes w champion seletcie
-        if pg.locateOnScreen(champselect_aram, confidence=0.8):         
+        if pg.locateOnScreen('champselect_aram.png', confidence=0.8):         
             sleep(0.5)
         else:
             sleep(3)
@@ -272,7 +271,6 @@ while True:
         gra.minimap_movement()
     else:
         sleep(30)
-        Lclick()
         gra.koniec()
         print('Game 1 finished')
         break

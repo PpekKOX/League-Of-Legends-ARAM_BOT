@@ -33,8 +33,8 @@ def checkIfProcessRunning(processName):
     return False;
 
 #os.startfile (r"C:\Users\PpekKOX\Desktop\ifritMango\FPS\fps32.lnk")
-print('Aram-Bot Version: 4.0')
-print('Last date of Update: 07.04.2023')
+print('Aram-Bot Version: 4.1')
+print('Last date of Update: 13.04.2023')
 os.system("TASKKILL /F /IM RiotClientServices.exe")
 os.system("TASKKILL /F /IM explorer.exe")
 time.sleep(2)
@@ -50,7 +50,7 @@ Lclick(843,456)
 time.sleep(20)
 lockfile = os.path.expanduser('~\\AppData\\Local\\Riot Games\\Riot Client\\Config\\lockfile')
 connection = LeagueConnection(lockfile, timeout=10)
-data = {'username': 'yourUSERNAME', 'password': 'yourPASSWORD', 'persistLogin': False}
+data = {'username': 'h201916604', 'password': 'wY5fTsno1anBEE2d', 'persistLogin': False}
 res = connection.put('/rso-auth/v1/session/credentials', json=data)
 res.status_code
 
