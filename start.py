@@ -50,7 +50,7 @@ Lclick(843,456)
 time.sleep(20)
 lockfile = os.path.expanduser('~\\AppData\\Local\\Riot Games\\Riot Client\\Config\\lockfile')
 connection = LeagueConnection(lockfile, timeout=10)
-data = {'username': 'h201916604', 'password': 'wY5fTsno1anBEE2d', 'persistLogin': False}
+data = {'username': 'USERNAME', 'password': 'PASSWORD', 'persistLogin': False}
 res = connection.put('/rso-auth/v1/session/credentials', json=data)
 res.status_code
 
